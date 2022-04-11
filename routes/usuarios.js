@@ -27,13 +27,25 @@ ruta.post('/',(req,res) => {
     }
 
     let body=req.body;
+    Usuario.findOne({email:body.email}, (err,user) => {
+        if(err){
+            return res.status(400).json({error:"server-error"});
+        }
+        if(user){
+            return res.status(400).json({
+                msg:"El usuario ya existe"
+            });
+        }
+    });
+
     let resultado= crearUsuario(body);
     const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     if(emailRegex.test(req.body.email)){
     resultado.then(user=>{
         res.json({
-            valor:user
+            nombre:user.nombre,
+            email :user.email,
         })
     }).catch(err=>{
         res.status(400).json({
@@ -47,7 +59,8 @@ ruta.put('/:email', (req,res)=>{
     let resultado= actualizarUsuario(req.params.email, req.body);
     resultado.then(valor=>{
         res.json({
-            valor:valor
+            nombre:valor.nombre,
+            email :valor.email,
         })
     }).catch(err=>{
         res.status(400).json({
@@ -60,7 +73,8 @@ ruta.delete('/:email',(req,res)=>{
     let resultado= desactivarUsuario(req.params.email);
     resultado.then(valor=>{
         res.json({
-            usuario:valor
+            nombre:valor.nombre,
+            email:valor.email,
         })
     }).catch(err=>{
         res.status(400).json({
@@ -73,7 +87,8 @@ ruta.delete('/:email',(req,res)=>{
 
 
 async function listarUsuarios(){
-    let usuarios= await Usuario.find({estado:true});
+    let usuarios= await Usuario.find({estado:true})
+    .select({nombre:1,email:1});
     return usuarios
 }
 
@@ -99,7 +114,7 @@ async function actualizarUsuario(email,body){
 }
 
 
-async function desactivarUsuario(email,body){
+async function desactivarUsuario(email){
     let usuario=await Usuario.findOneAndUpdate({email:email},{
         $set:{
             estado:false

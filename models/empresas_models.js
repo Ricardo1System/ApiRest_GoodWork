@@ -14,7 +14,7 @@ const empresaSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    ubicación:{
+    ubicacion:{
         type:String,
         require:true
     },
