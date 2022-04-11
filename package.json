@@ -1,16 +1,23 @@
 {
   "name": "apirest",
   "version": "1.0.0",
-  "description": "\"Api de la Aplicación GoodWork\"",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "\"Ricardo Tenorio Ruiz\"",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ricardo1System/ApiRest_GoodWork.git"
+  },
+  "author": "Ricardo Tenorio Ruiz",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ricardo1System/ApiRest_GoodWork/issues"
+  },
+  "homepage": "https://github.com/Ricardo1System/ApiRest_GoodWork#readme",
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "express": "^4.17.2",
-    "mongoose": "^6.1.10"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10"
   }
 }
