@@ -1,0 +1,65 @@
+const mongoose=require('mongoose');
+
+const empresaSchema = new mongoose.Schema({
+
+    email:{
+        type:String,
+        require:true
+    },
+    password:{
+        type:String,
+        require:true
+    },
+    nombre:{
+        type:String,
+        require:true
+    },
+    ubicación:{
+        type:String,
+        require:true
+    },
+    contacto:{
+        type:String,
+        require:true
+    },
+    estado:{
+        type:Boolean,
+        default:true
+    },
+    trabajos:{
+            status:{
+                type:Boolean,
+            },
+            puesto:{
+                type:String,
+            },
+            horario:{
+                type:String,
+            },
+            descripcion:{
+                type:String,
+            },
+            monto:{
+                type:String,
+            },
+            requisitos:{
+                        sexo:{
+                            type:Number,
+                        },
+                        edad:{
+                            type:String
+                        },
+                        experiencias:{
+                            type:Boolean,
+                        },
+                        compromiso:{
+                            type:Boolean
+                        },
+                        estudios:{
+                            type:String
+                        }
+                }
+    }
+});
+
+module.exports=(mongoose.model('Empresa',empresaSchema));
